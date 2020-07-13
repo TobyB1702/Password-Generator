@@ -12,10 +12,13 @@ def parametersForString(asciiLettersLower, asciiLettersUpper, digits, punctuatio
     myWord = ""
     if asciiLettersLower:
         myWord += string.ascii_lowercase
+
     if asciiLettersUpper:
         myWord += string.ascii_uppercase
+
     if digits:
         myWord += string.digits
+
     if punctuation:
         myWord += string.punctuation
 
