@@ -6,4 +6,5 @@ letters = string.ascii_letters
 symbols = string.punctuation
 randomword = random.choice(letters)
 
-print(symbols)
+random = ''.join([random.choice(string.ascii_letters + string.digits + string.punctuation ) for n in range(12)])
+print(random)
