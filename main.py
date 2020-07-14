@@ -1,28 +1,29 @@
 import random
 import string
 
+class Backend:
+    def randomStringGenerator(self, lengthOfString):
+        get = Backend()
+        word = ''.join(
+            [random.choice(get.parametersForString(True, False, False, False)) for n in range(lengthOfString)])
+        return word
 
-def randomStringGenerator(lengthOfString):
-    word = ''.join(
-        [random.choice(parametersForString(True, False, False, False)) for n in range(lengthOfString)])
-    return word
+    def parametersForString(self, asciiLettersLower, asciiLettersUpper, digits, punctuation):
+        myWord = ""
+        if asciiLettersLower:
+            myWord += string.ascii_lowercase
 
+        if asciiLettersUpper:
+            myWord += string.ascii_uppercase
 
-def parametersForString(asciiLettersLower, asciiLettersUpper, digits, punctuation):
-    myWord = ""
-    if asciiLettersLower:
-        myWord += string.ascii_lowercase
+        if digits:
+            myWord += string.digits
 
-    if asciiLettersUpper:
-        myWord += string.ascii_uppercase
+        if punctuation:
+            myWord += string.punctuation
 
-    if digits:
-        myWord += string.digits
+        return myWord
 
-    if punctuation:
-        myWord += string.punctuation
+test = Backend()
+print(test.randomStringGenerator(100))
 
-    return myWord
-
-
-print(randomStringGenerator(100))
