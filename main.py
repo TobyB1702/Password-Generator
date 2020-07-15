@@ -4,9 +4,9 @@ import tkinter as tk
 
 class Backend:
     def randomStringGenerator(self, lengthOfString):
-        get = Backend()
+        b = Backend()
         word = ''.join(
-            [random.choice(get.parametersForString(True, False, False, False)) for n in range(lengthOfString)])
+            [random.choice(b.parametersForString(True, True, True, True)) for n in range(lengthOfString)])
         return word
 
     def parametersForString(self, asciiLettersLower, asciiLettersUpper, digits, punctuation):
@@ -25,8 +25,8 @@ class Backend:
 
         return myWord
 
-test = Backend()
-print(test.randomStringGenerator(100))
+a = Backend()
+print(a.randomStringGenerator(100))
 
 class Application(tk.Frame):
     def __init__(self, master=None):
@@ -46,9 +46,10 @@ class Application(tk.Frame):
         self.quit.pack(side="bottom")
 
     def get_password(self):
-        print("hi there, everyone!")
+        getBackEnd = Backend()
+        test = getBackEnd.randomStringGenerator(100)
+        print(test)
 
 root = tk.Tk()
 app = Application(master=root)
 app.mainloop()
-
