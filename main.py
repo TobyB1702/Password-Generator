@@ -2,6 +2,7 @@ import random
 import string
 import tkinter as tk
 
+
 class Backend:
     def randomStringGenerator(self, lengthOfString):
         b = Backend()
@@ -25,8 +26,6 @@ class Backend:
 
         return myWord
 
-a = Backend()
-print(a.randomStringGenerator(100))
 
 class Application(tk.Frame):
     def __init__(self, master=None):
@@ -36,19 +35,20 @@ class Application(tk.Frame):
         self.create_widgets()
 
     def create_widgets(self):
-        self.hi_there = tk.Button(self)
-        self.hi_there["text"] = "Hello World\n(click me)"
-        self.hi_there["command"] = self.get_password
-        self.hi_there.pack(side="top")
+        self.textBox = tk.Label(self, text="Enter Length of password").grid(row=0)
+        self.inputForLengthOfPassword = tk.Entry(self).grid(row=0, column=1)
+
+        self.generate_Password = tk.Button(self, text="Generate a password",
+                                           command=self.get_password).grid(row=1)
 
         self.quit = tk.Button(self, text="QUIT", fg="red",
-                              command=self.master.destroy)
-        self.quit.pack(side="bottom")
+                              command=self.master.destroy).grid(row=1, column=1)
 
     def get_password(self):
         getBackEnd = Backend()
         test = getBackEnd.randomStringGenerator(100)
         print(test)
+
 
 root = tk.Tk()
 app = Application(master=root)
