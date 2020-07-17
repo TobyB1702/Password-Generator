@@ -28,34 +28,44 @@ class Backend:
 
 
 class Application(tk.Frame):
+
     def __init__(self, master=None):
+        uppercaseVar, lowercaseVar, digitsVar, punctuationVar = tk.BooleanVar(), tk.BooleanVar(), tk.BooleanVar(), tk.BooleanVar()
         super().__init__(master)
         self.master = master
         self.pack()
-        self.create_widgets()
+        self.GeneratePasswordWidgets(uppercaseVar, lowercaseVar, digitsVar, punctuationVar)
+        self.InputForPasswordLengthWidgets()
+        self.SelectionOfTextForPasswordWidgets(uppercaseVar, lowercaseVar, digitsVar, punctuationVar)
+        self.QuitWidgets()
 
-    def create_widgets(self):
+    def GeneratePasswordWidgets(self, uppercaseVar, lowercaseVar, digitsVar, punctuationVar):
+        self.generate_PasswordB = tk.Button(self, text="Generate a password",
+                                           command=lambda: self.get_password(
+                                               int(self.inputForLengthOfPasswordE.get()), uppercaseVar.get(), lowercaseVar.get(), digitsVar.get(), punctuationVar.get())).grid(row=1)
+        self.outputForPasswordText = tk.Text(self,height=5,width=40)
+        self.outputForPasswordText.grid(row=4)
+
+    def QuitWidgets(self):
+        self.quitB = tk.Button(self, text="QUIT", fg="red",
+                               command=self.master.destroy).grid(row=1, column=1)
+
+    def SelectionOfTextForPasswordWidgets(self,  uppercaseVar, lowercaseVar, digitsVar, punctuationVar):
+        self.uppercaseCB = tk.Checkbutton(self, text="Uppercase", variable=uppercaseVar,
+                                          command=lambda: self.cb(uppercaseVar)).grid(row=3)
+        self.lowercaseCB = tk.Checkbutton(self, text="Lowercase", variable=lowercaseVar,
+                                          command=lambda: self.cb(lowercaseVar)).grid(row=3, column=1)
+        self.digitsCB = tk.Checkbutton(self, text="Digits", variable=digitsVar,
+                                       command=lambda: self.cb(digitsVar)).grid(row=3, column=2)
+        self.punctuationCB = tk.Checkbutton(self, text="Punctation", variable=punctuationVar,
+                                            command=lambda: self.cb(punctuationVar)).grid(row=3, column=3)
+
+    def InputForPasswordLengthWidgets(self):
         self.textBox = tk.Label(self, text="Enter Length of password").grid(row=0)
-
         self.inputForLengthOfPasswordE = tk.Entry(self)
         self.inputForLengthOfPasswordE.grid(row=0, column=1)
         self.inputForLengthOfPasswordE.insert(0, "16")
 
-        uppercaseVar, lowercaseVar, digitsVar, punctuationVar = tk.BooleanVar(), tk.BooleanVar(), tk.BooleanVar(), tk.BooleanVar()
-
-        self.uppercaseCB = tk.Checkbutton(self, text="Uppercase", variable=uppercaseVar, command=lambda: self.cb(uppercaseVar)).grid(row=3)
-        self.lowercaseCB = tk.Checkbutton(self, text="Lowercase", variable=lowercaseVar, command=lambda: self.cb(lowercaseVar)).grid(row=3, column=1)
-        self.digitsCB = tk.Checkbutton(self, text="Digits", variable=digitsVar, command=lambda: self.cb(digitsVar)).grid(row=3, column=2)
-        self.punctuationCB = tk.Checkbutton(self, text="Punctation", variable=punctuationVar, command=lambda: self.cb(punctuationVar)).grid(row=3, column=3)
-
-        self.generate_PasswordB = tk.Button(self, text="Generate a password",
-                                           command=lambda: self.get_password(
-                                               int(self.inputForLengthOfPasswordE.get()), uppercaseVar.get(), lowercaseVar.get(), digitsVar.get(), punctuationVar.get())).grid(row=1)
-
-        self.quitB = tk.Button(self, text="QUIT", fg="red",
-                              command=self.master.destroy).grid(row=1, column=1)
-
-#refactor this
     def get_password(self, passwordLength, bool1, bool2, bool3, boo4):
         getBackEnd = Backend()
         test = getBackEnd.randomStringGenerator(passwordLength, bool1, bool2, bool3, boo4)
