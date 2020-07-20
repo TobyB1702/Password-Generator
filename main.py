@@ -51,7 +51,7 @@ class Application(tk.Frame):
                                            self.inputForLengthOfPasswordE.get(), uppercaseVar.get(), lowercaseVar.get(),
                                            digitsVar.get(), punctuationVar.get()))
 
-        generate_PasswordB.grid(row=1)
+        generate_PasswordB.grid(row=2)
 
         textBox.grid(row=0)
         self.inputForLengthOfPasswordE.grid(row=0, column=1)
@@ -59,7 +59,7 @@ class Application(tk.Frame):
     def QuitWidgets(self):
         quitB = tk.Button(self, text="QUIT", fg="red",
                           command=self.master.destroy)
-        quitB.grid(row=1, column=1)
+        quitB.grid(row=2, column=1)
 
     def SelectionOfTextForPasswordWidgets(self, uppercaseVar, lowercaseVar, digitsVar, punctuationVar):
         uppercaseCB = tk.Checkbutton(self, text="Uppercase", variable=uppercaseVar)
@@ -67,10 +67,10 @@ class Application(tk.Frame):
         digitsCB = tk.Checkbutton(self, text="Digits", variable=digitsVar)
         punctuationCB = tk.Checkbutton(self, text="Punctation", variable=punctuationVar)
 
-        uppercaseCB.grid(row=3)
-        lowercaseCB.grid(row=3, column=1)
-        digitsCB.grid(row=3, column=2)
-        punctuationCB.grid(row=3, column=3)
+        uppercaseCB.grid(row=1)
+        lowercaseCB.grid(row=1, column=1)
+        digitsCB.grid(row=1, column=2)
+        punctuationCB.grid(row=1, column=3)
 
     def get_password(self, stringpasswordLength, bool1, bool2, bool3, boo4):
         try:
@@ -78,10 +78,10 @@ class Application(tk.Frame):
             getBackEnd = Backend()
             password = getBackEnd.randomStringGenerator(passwordLength, bool1, bool2, bool3, boo4)
             outputForPasswordText = tk.Text(self, height=5, width=40)
-            outputForPasswordText.grid(row=4)
+            outputForPasswordText.grid(row=2,column=5)
             outputForPasswordText.insert('1.0', password)
             copyToClipBoardBT = tk.Button(self, text="Copy to ClipBoard", command=lambda: self.SetClipboard(password))
-            copyToClipBoardBT.grid(row=4, column=1)
+            copyToClipBoardBT.grid(row=2, column=6)
             return "Password Created"
 
         except ValueError: print("Invalid Int")
